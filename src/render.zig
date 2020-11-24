@@ -22,7 +22,7 @@ pub const Renderer = struct {
     }
 
     pub fn setDrawColor(self: *Self, alpha: u32, red: u32, green: u32, blue: u32) void {
-        lsdl.SDL_SetRendererDrawColor(self.renderer, alpha, red, green, blue);
+        lsdl.SDL_SetRenderDrawColor(self.renderer, alpha, red, green, blue);
     }
 
     pub fn clear(self: *Self) void {
