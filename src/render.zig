@@ -13,24 +13,33 @@ pub const Renderer = struct {
         lsdl.render.RenderDrawCircleF(self.renderer, centreX, centreY, radius);
     }
 
-    pub fn drawLine(self: *Self, x: f32, y: f32, targetX: f32, targetY: f32) !void {
+    pub fn drawLine(self: *Self, x: f32, y: f32, targetX: f32, targetY: f32) void {
         if (lsdl.SDL_RenderDrawLineF(self.renderer, x, y, targetX, targetY) < 0)
             lsdl.SDLError();
     }
 
-    pub fn drawPoint(self: *Self, x: f32, y: f32) !void {
+    pub fn drawPoint(self: *Self, x: f32, y: f32) void {
         if (lsdl.SDL_RenderDrawPointF(self.renderer, x, y) < 0)
             lsdl.SDLError();
     }
 
-    pub fn setDrawColor(self: *Self, red: u8, green: u8, blue: u8, alpha: u8) !void {
+    pub fn setDrawColor(self: *Self, red: u8, green: u8, blue: u8, alpha: u8) void {
         if (lsdl.SDL_SetRenderDrawColor(self.renderer, red, green, blue, alpha) < 0)
             lsdl.SDLError();
     }
 
-    pub fn clear(self: *Self) !void {
+    pub fn clear(self: *Self, red: u8, green: u8, blue: u8, alpha: u8) void {
+        var old_red: u8 = undefined;
+        var old_green: u8 = undefined;
+        var old_blue: u8 = undefined;
+        var old_alpha: u8 = undefined;
+        if (lsdl.SDL_GetRenderDrawColor(self.renderer, &old_red, &old_green, &old_blue, &old_alpha) < 0)
+            lsdl.SDLError();
+
+        self.setDrawColor(red, green, blue, alpha);
         if (lsdl.SDL_RenderClear(self.renderer) < 0)
             lsdl.SDLError();
+        self.setDrawColor(old_red, old_green, old_blue, old_alpha);
     }
 
     pub fn present(self: *Self) void {
