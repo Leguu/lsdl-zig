@@ -16,7 +16,7 @@ pub const Timer = struct {
     /// Dictates whether the loop should do a frame.
     /// value must be in milliseconds per frame.
     pub fn doFrame(self: *Self, value: u64) bool {
-        const fpns = @floatToInt(u64, (1.0 / @intToFloat(f64, value)) * time.ns_per_s);
+        const fpns = @floatToInt(u64, (1.0 / @intToFloat(f128, value)) * time.ns_per_s);
         const now = self.timer.read();
 
         if (!self.previous.contains(value))

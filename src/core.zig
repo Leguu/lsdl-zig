@@ -5,7 +5,7 @@ const lsdl = @import("lsdl.zig");
 
 pub const Core = struct {
     window: *lsdl.SDL_Window,
-    renderer: lsdl.render.Renderer,
+    render: lsdl.render.Render,
     input: lsdl.input.Input = lsdl.input.Input.new(),
 
     window_width: i32,
@@ -28,7 +28,7 @@ pub const Core = struct {
 
         return Self{
             .window = window,
-            .renderer = lsdl.render.Renderer.new(renderer),
+            .render = lsdl.render.Render.new(renderer),
             .window_width = width,
             .window_height = height,
         };

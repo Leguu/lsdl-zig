@@ -1,6 +1,6 @@
 const lsdl = @import("lsdl.zig");
 
-pub const Renderer = struct {
+pub const Render = struct {
     renderer: *lsdl.SDL_Renderer,
 
     const Self = @This();
