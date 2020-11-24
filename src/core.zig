@@ -5,7 +5,8 @@ const lsdl = @import("lsdl.zig");
 
 pub const Core = struct {
     window: *lsdl.SDL_Window,
-    renderer: *lsdl.SDL_Renderer,
+    renderer: lsdl.render.Renderer,
+    input: lsdl.input.Input = lsdl.input.Input.new(),
 
     window_width: i32,
     window_height: i32,
@@ -25,6 +26,11 @@ pub const Core = struct {
             std.debug.panic("Error has occured creating renderer: {}\n", .{lsdl.SDL_GetError()});
         };
 
-        return Self{ .window = window, .renderer = renderer, .window_width = width, .window_height = height };
+        return Self{
+            .window = window,
+            .renderer = lsdl.render.Renderer.new(renderer),
+            .window_width = width,
+            .window_height = height,
+        };
     }
 };

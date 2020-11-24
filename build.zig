@@ -2,7 +2,7 @@ const Builder = @import("std").build.Builder;
 
 pub fn build(b: *Builder) void {
     const mode = b.standardReleaseOptions();
-    const lib = b.addStaticLibrary("lsdl-zig", "src/main.zig");
+    const lib = b.addStaticLibrary("lsdl-zig", "src/lsdl.zig");
     lib.linkLibC();
     lib.linkSystemLibrary("SDL2");
     lib.setBuildMode(mode);
