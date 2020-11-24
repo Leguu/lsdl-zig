@@ -14,7 +14,7 @@ pub const Core = struct {
 
     pub fn new(width: i32, height: i32) Self {
         if (lsdl.SDL_Init(lsdl.SDL_INIT_VIDEO) != 0) {
-            std.debug.panic("Error has occured.newializing SDL: {}\n", .{lsdl.SDL_GetError()});
+            std.debug.panic("Error has occured initializing SDL: {}\n", .{lsdl.SDL_GetError()});
         }
 
         const window = lsdl.SDL_CreateWindow(0, 0, 0, width, height, 0) orelse {
@@ -28,7 +28,3 @@ pub const Core = struct {
         return Self{ .window = window, .renderer = renderer, .window_width = width, .window_height = height };
     }
 };
-
-test "basic add functionality" {
-    _ = Core.new(1000, 800);
-}

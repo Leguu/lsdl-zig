@@ -1,7 +1,7 @@
 const std = @import("std");
 const time = std.time;
 
-const HashMap= std.hash_map.AutoHashMap(u64, u64);
+const HashMap = std.hash_map.AutoHashMap(u64, u64);
 
 pub const Timer = struct {
     timer: time.Timer,

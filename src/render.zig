@@ -1,4 +1,4 @@
-const lsdl= @import("lsdl.zig");
+const lsdl = @import("lsdl.zig");
 
 /// Draw a circle using the Midpoint Circle Algorithm.
 pub fn RenderDrawCircleF(renderer: *lsdl.SDL_Renderer, centreX: f32, centreY: f32, radius: f32) void {
