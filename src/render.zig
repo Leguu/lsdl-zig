@@ -13,20 +13,24 @@ pub const Renderer = struct {
         lsdl.render.RenderDrawCircleF(self.renderer, centreX, centreY, radius);
     }
 
-    pub fn drawLine(self: *Self, x: f32, y: f32, targetX: f32, targetY: f32) void {
-        lsdl.SDL_RenderDrawLineF(self.renderer, x, y, targetX, targetY);
+    pub fn drawLine(self: *Self, x: f32, y: f32, targetX: f32, targetY: f32) !void {
+        if (lsdl.SDL_RenderDrawLineF(self.renderer, x, y, targetX, targetY) < 0)
+            lsdl.SDLError();
     }
 
-    pub fn drawPoint(self: *Self, x: f32, y: f32) void {
-        lsdl.SDL_RenderDrawPointF(self.renderer, x, y);
+    pub fn drawPoint(self: *Self, x: f32, y: f32) !void {
+        if (lsdl.SDL_RenderDrawPointF(self.renderer, x, y) < 0)
+            lsdl.SDLError();
     }
 
-    pub fn setDrawColor(self: *Self, alpha: u32, red: u32, green: u32, blue: u32) void {
-        lsdl.SDL_SetRenderDrawColor(self.renderer, alpha, red, green, blue);
+    pub fn setDrawColor(self: *Self, red: u8, green: u8, blue: u8, alpha: u8) !void {
+        if (lsdl.SDL_SetRenderDrawColor(self.renderer, red, green, blue, alpha) < 0)
+            lsdl.SDLError();
     }
 
-    pub fn clear(self: *Self) void {
-        lsdl.SDL_RenderClear(self.renderer);
+    pub fn clear(self: *Self) !void {
+        if (lsdl.SDL_RenderClear(self.renderer) < 0)
+            lsdl.SDLError();
     }
 
     pub fn present(self: *Self) void {
