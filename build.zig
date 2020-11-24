@@ -8,7 +8,7 @@ pub fn build(b: *Builder) void {
     lib.setBuildMode(mode);
     lib.install();
 
-    var main_tests = b.addTest("src/main.zig");
+    var main_tests = b.addTest("src/test.zig");
     main_tests.linkLibC();
     main_tests.linkSystemLibrary("SDL2");
     main_tests.setBuildMode(mode);
