@@ -17,6 +17,11 @@ pub fn Vector(comptime T: type) type {
             return Self{ .x = x, .y = y };
         }
 
+        pub fn set(self: *Self, x: T, y: T) void {
+            self.x = x;
+            self.y = y;
+        }
+
         pub fn add(self: Self, other: Self) Self {
             return new(self.x + other.x, self.y + other.y);
         }

@@ -1,11 +1,9 @@
 const std = @import("std");
 const time = std.time;
 
-const HashMap = std.hash_map.AutoHashMap(u64, u64);
-
 pub const Timer = struct {
     timer: time.Timer,
-    previous: HashMap = HashMap.init(std.heap.page_allocator),
+    previous: u64 = 0,
 
     const Self = @This();
 
@@ -15,17 +13,19 @@ pub const Timer = struct {
 
     /// Dictates whether the loop should do a frame.
     /// value must be in milliseconds per frame.
-    pub fn doFrame(self: *Self, value: u64) bool {
-        const fpns = @floatToInt(u64, (1.0 / @intToFloat(f128, value)) * time.ns_per_s);
-        const now = self.timer.read();
+    pub fn doFrame(self: *Self, value: anytype) bool {
+        const fpns = @floatToInt(u64, time.ns_per_s / value);
 
-        if (!self.previous.contains(value))
-            self.previous.put(value, 0) catch unreachable;
+        return self.timer.read() - self.previous > fpns;
+    }
 
-        if (now - self.previous.get(value).? < fpns)
-            return false;
+    // Delta-time in nanoseconds
+    pub fn deltaTime(self: *Self, comptime T: type) T {
+        const dt = self.timer.read() - self.previous;
+        return std.math.lossyCast(T, dt);
+    }
 
-        self.previous.put(value, now) catch unreachable;
-        return true;
+    pub fn tick(self: *Self) void {
+        self.previous = self.timer.read();
     }
 };
