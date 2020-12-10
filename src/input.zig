@@ -15,4 +15,17 @@ pub const Input = struct {
             return null;
         }
     }
+
+    pub fn mouse_pressed(self: *Self) bool {
+        return lsdl.SDL_GetMouseState(0, 0) == 1;
+    }
+
+    pub fn mouse_position(self: *Self) struct {
+        x: i32, y: i32
+    } {
+        var x: i32 = undefined;
+        var y: i32 = undefined;
+        _ = lsdl.SDL_GetMouseState(&x, &y);
+        return .{ .x = x, .y = y };
+    }
 };
