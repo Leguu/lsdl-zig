@@ -60,5 +60,9 @@ pub fn Vector(comptime T: type) type {
             const direction = other.subtract(self.*);
             self.* = self.add(direction.rescale(percent));
         }
+
+        pub fn equals(self: *Self, other: Self) bool {
+            return self.x == other.x and self.y == other.y;
+        }
     };
 }
