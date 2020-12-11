@@ -21,6 +21,12 @@ pub const Render = struct {
             lsdl.SDLError();
     }
 
+    pub fn drawRectangle(self: *Self, x: f32, y: f32, width: f32, height: f32) void {
+        const rectangle = lsdl.SDL_FRect{ .x = x, .y = y, .w = width, .h = height };
+        if (lsdl.SDL_RenderDrawRectF(self.renderer, &rectangle) < 0)
+            lsdl.SDLError();
+    }
+
     pub fn drawPoint(self: *Self, x: f32, y: f32) void {
         if (lsdl.SDL_RenderDrawPointF(self.renderer, x, y) < 0)
             lsdl.SDLError();
