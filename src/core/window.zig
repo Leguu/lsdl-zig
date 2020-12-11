@@ -14,14 +14,14 @@ pub const Window = struct {
         return Self{ .window = window };
     }
 
-    pub fn size(self: *Self) struct {
-        width: i32, height: i32
+    pub fn size(self: *Self, comptime T: type) struct {
+        width: T, height: T
     } {
         var width: i32 = 0;
         var height: i32 = 0;
 
         lsdl.SDL_GetWindowSize(self.window, &width, &height);
 
-        return .{ .width = width, .height = height };
+        return .{ .width = std.math.lossyCast(T, width), .height = std.math.lossyCast(T, height) };
     }
 };
