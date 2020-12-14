@@ -7,7 +7,10 @@ pub const Vector = @import("vector.zig").Vector;
 pub const Timer = @import("timer.zig").Timer;
 
 pub const Core = @import("core/core.zig").Core;
-pub const Render = @import("core/render.zig").Render;
+
+const render = @import("core/render.zig");
+pub const Color = render.Color;
+pub const Render = render.Render;
 
 const std = @import("std");
 

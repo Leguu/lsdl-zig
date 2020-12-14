@@ -3,6 +3,31 @@ const lsdl = @import("../lsdl.zig");
 
 const Window = @import("window.zig").Window;
 
+pub const Color = struct {
+    red: u8,
+    green: u8,
+    blue: u8,
+    alpha: u8,
+
+    const Self = @This();
+
+    pub fn new(red: u8, green: u8, blue: u8, alpha: u8) Self {
+        return Self{ .red = red, .green = green, .blue = blue, .alpha = alpha };
+    }
+
+    pub fn black() Self {
+        return new(0, 0, 0, 255);
+    }
+
+    pub fn gray(level: u8) Self {
+        return new(level, level, level, 255);
+    }
+
+    pub fn white() Self {
+        return new(255, 255, 255, 255);
+    }
+};
+
 pub const Render = struct {
     renderer: *lsdl.SDL_Renderer,
 
@@ -32,23 +57,24 @@ pub const Render = struct {
             lsdl.SDLError();
     }
 
-    pub fn setDrawColor(self: *Self, red: u8, green: u8, blue: u8, alpha: u8) void {
-        if (lsdl.SDL_SetRenderDrawColor(self.renderer, red, green, blue, alpha) < 0)
+    pub fn setDrawColor(self: *Self, color: Color) void {
+        if (lsdl.SDL_SetRenderDrawColor(self.renderer, color.red, color.green, color.blue, color.alpha) < 0)
             lsdl.SDLError();
     }
 
-    pub fn clear(self: *Self, red: u8, green: u8, blue: u8, alpha: u8) void {
-        var old_red: u8 = undefined;
-        var old_green: u8 = undefined;
-        var old_blue: u8 = undefined;
-        var old_alpha: u8 = undefined;
-        if (lsdl.SDL_GetRenderDrawColor(self.renderer, &old_red, &old_green, &old_blue, &old_alpha) < 0)
+    pub fn getColor(self: *Self) Color {
+        var color = Color.black();
+        if (lsdl.SDL_GetRenderDrawColor(self.renderer, &color.red, &color.green, &color.blue, &color.alpha) < 0)
             lsdl.SDLError();
+        return color;
+    }
 
-        self.setDrawColor(red, green, blue, alpha);
+    pub fn clear(self: *Self, color: Color) void {
+        const old = self.getColor();
+        self.setDrawColor(color);
         if (lsdl.SDL_RenderClear(self.renderer) < 0)
             lsdl.SDLError();
-        self.setDrawColor(old_red, old_green, old_blue, old_alpha);
+        self.setDrawColor(old);
     }
 
     pub fn present(self: *Self) void {
@@ -66,14 +92,14 @@ pub const Render = struct {
         var err = tx - diameter;
 
         while (x >= y) {
-            _ = lsdl.SDL_RenderDrawPointF(self.renderer, centreX + x, centreY - y);
-            _ = lsdl.SDL_RenderDrawPointF(self.renderer, centreX + x, centreY + y);
-            _ = lsdl.SDL_RenderDrawPointF(self.renderer, centreX - x, centreY - y);
-            _ = lsdl.SDL_RenderDrawPointF(self.renderer, centreX - x, centreY + y);
-            _ = lsdl.SDL_RenderDrawPointF(self.renderer, centreX + y, centreY - x);
-            _ = lsdl.SDL_RenderDrawPointF(self.renderer, centreX + y, centreY + x);
-            _ = lsdl.SDL_RenderDrawPointF(self.renderer, centreX - y, centreY - x);
-            _ = lsdl.SDL_RenderDrawPointF(self.renderer, centreX - y, centreY + x);
+            self.drawPoint(centreX + x, centreY + y);
+            self.drawPoint(centreX - x, centreY - y);
+            self.drawPoint(centreX - x, centreY + y);
+            self.drawPoint(centreX + y, centreY - x);
+            self.drawPoint(centreX + y, centreY + x);
+            self.drawPoint(centreX - y, centreY - x);
+            self.drawPoint(centreX - y, centreY + x);
+            self.drawPoint(centreX + x, centreY - y);
 
             if (err <= 0) {
                 y += 1;
