@@ -7,16 +7,18 @@ usingnamespace @cImport({
 
 pub const Core = @import("core/core.zig").Core;
 
-pub const Input = @import("input.zig").Input;
+pub const input = @import("input.zig");
+
 pub const Vector = @import("vector.zig").Vector;
 pub const Timer = @import("timer.zig").Timer;
 
 pub const Render = @import("core/render.zig").Render;
 pub const Color = @import("color.zig").Color;
 
-pub const Scancode = @import("const/scancode.zig").Scancode;
-pub const Keycode = @import("const/keycode.zig").Keycode;
-pub const Keymod = @import("const/keymod.zig").Keymod;
+pub const events = @import("const/events.zig");
+pub const scancode = @import("const/scancode.zig");
+pub const keycode = @import("const/keycode.zig");
+pub const keymod = @import("const/keymod.zig");
 
 const std = @import("std");
 

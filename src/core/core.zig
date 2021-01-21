@@ -31,4 +31,8 @@ pub const Core = struct {
             .render = render,
         };
     }
+
+    pub fn cleanup(self: *Self) void {
+        lsdl.SDL_Quit();
+    }
 };
