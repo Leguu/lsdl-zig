@@ -9,7 +9,8 @@ const Render = @import("render.zig").Render;
 pub const Core = struct {
     window: Window,
     render: Render,
-    input: lsdl.Input = lsdl.Input.new(),
+
+    pub const input = lsdl.Input;
 
     const Self = @This();
 
