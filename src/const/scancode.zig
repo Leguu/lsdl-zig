@@ -1,350 +1,265 @@
-pub const Scancode = enum(i32) {
-    UNKNOWN = 0,
+pub const UNKNOWN = 0;
 
-    // \name Usage page 0x07
-    // These values are from usage page 0x07 (USB keyboard page).
+pub const A = 4;
+pub const B = 5;
+pub const C = 6;
+pub const D = 7;
+pub const E = 8;
+pub const F = 9;
+pub const G = 10;
+pub const H = 11;
+pub const I = 12;
+pub const J = 13;
+pub const K = 14;
+pub const L = 15;
+pub const M = 16;
+pub const N = 17;
+pub const O = 18;
+pub const P = 19;
+pub const Q = 20;
+pub const R = 21;
+pub const S = 22;
+pub const T = 23;
+pub const U = 24;
+pub const V = 25;
+pub const W = 26;
+pub const X = 27;
+pub const Y = 28;
+pub const Z = 29;
 
-    A = 4,
-    B = 5,
-    C = 6,
-    D = 7,
-    E = 8,
-    F = 9,
-    G = 10,
-    H = 11,
-    I = 12,
-    J = 13,
-    K = 14,
-    L = 15,
-    M = 16,
-    N = 17,
-    O = 18,
-    P = 19,
-    Q = 20,
-    R = 21,
-    S = 22,
-    T = 23,
-    U = 24,
-    V = 25,
-    W = 26,
-    X = 27,
-    Y = 28,
-    Z = 29,
+pub const ONE = 30;
+pub const TWO = 31;
+pub const THREE = 32;
+pub const FOUR = 33;
+pub const FIVE = 34;
+pub const SIX = 35;
+pub const SEVEN = 36;
+pub const EIGHT = 37;
+pub const NINE = 38;
+pub const ZERO = 39;
 
-    ONE = 30,
-    TWO = 31,
-    THREE = 32,
-    FOUR = 33,
-    FIVE = 34,
-    SIX = 35,
-    SEVEN = 36,
-    EIGHT = 37,
-    NINE = 38,
-    ZERO = 39,
+pub const RETURN = 40;
+pub const ESCAPE = 41;
+pub const BACKSPACE = 42;
+pub const TAB = 43;
+pub const SPACE = 44;
 
-    RETURN = 40,
-    ESCAPE = 41,
-    BACKSPACE = 42,
-    TAB = 43,
-    SPACE = 44,
+pub const MINUS = 45;
+pub const EQUALS = 46;
+pub const LEFTBRACKET = 47;
+pub const RIGHTBRACKET = 48;
+pub const BACKSLASH = 49;
+pub const NONUSHASH = 50;
+pub const SEMICOLON = 51;
+pub const APOSTROPHE = 52;
+pub const GRAVE = 53;
 
-    MINUS = 45,
-    EQUALS = 46,
-    LEFTBRACKET = 47,
-    RIGHTBRACKET = 48,
-    BACKSLASH = 49, // Located at the lower left of the return
-    //   key on ISO keyboards and at the right end
-    //   of the QWERTY row on ANSI keyboards.
-    //   Produces REVERSE SOLIDUS (backslash) and
-    //   VERTICAL LINE in a US layout, REVERSE
-    //   SOLIDUS and VERTICAL LINE in a UK Mac
-    //   layout, NUMBER SIGN and TILDE in a UK
-    //   Windows layout, DOLLAR SIGN and POUND SIGN
-    //   in a Swiss German layout, NUMBER SIGN and
-    //   APOSTROPHE in a German layout, GRAVE
-    //   ACCENT and POUND SIGN in a French Mac
-    //   layout, and ASTERISK and MICRO SIGN in a
-    //   French Windows layout.
-    NONUSHASH = 50, // ISO USB keyboards actually use this code
-    //   instead of 49 for the same key, but all
-    //   OSes I've seen treat the two codes
-    //   identically. So, as an implementor, unless
-    //   your keyboard generates both of those
-    //   codes and your OS treats them differently,
-    //   you should generate BACKSLASH
-    //   instead of this code. As a user, you
-    //   should not rely on this code because SDL
-    //   will never generate it with most (all?)
-    //   keyboards.
-    SEMICOLON = 51,
-    APOSTROPHE = 52,
-    GRAVE = 53, // Located in the top left corner (on both ANSI
-    //   and ISO keyboards). Produces GRAVE ACCENT and
-    //   TILDE in a US Windows layout and in US and UK
-    //   Mac layouts on ANSI keyboards, GRAVE ACCENT
-    //   and NOT SIGN in a UK Windows layout, SECTION
-    //   SIGN and PLUS-MINUS SIGN in US and UK Mac
-    //   layouts on ISO keyboards, SECTION SIGN and
-    //   DEGREE SIGN in a Swiss German layout (Mac:
-    //   only on ISO keyboards), CIRCUMFLEX ACCENT and
-    //   DEGREE SIGN in a German layout (Mac: only on
-    //   ISO keyboards), SUPERSCRIPT TWO and TILDE in a
-    //   French Windows layout, COMMERCIAL AT and
-    //   NUMBER SIGN in a French Mac layout on ISO
-    //   keyboards, and LESS-THAN SIGN and GREATER-THAN
-    //   SIGN in a Swiss German, German, or French Mac
-    //   layout on ANSI keyboards.
+pub const COMMA = 54;
+pub const PERIOD = 55;
+pub const SLASH = 56;
 
-    COMMA = 54,
-    PERIOD = 55,
-    SLASH = 56,
+pub const CAPSLOCK = 57;
 
-    CAPSLOCK = 57,
+pub const F1 = 58;
+pub const F2 = 59;
+pub const F3 = 60;
+pub const F4 = 61;
+pub const F5 = 62;
+pub const F6 = 63;
+pub const F7 = 64;
+pub const F8 = 65;
+pub const F9 = 66;
+pub const F10 = 67;
+pub const F11 = 68;
+pub const F12 = 69;
 
-    F1 = 58,
-    F2 = 59,
-    F3 = 60,
-    F4 = 61,
-    F5 = 62,
-    F6 = 63,
-    F7 = 64,
-    F8 = 65,
-    F9 = 66,
-    F10 = 67,
-    F11 = 68,
-    F12 = 69,
+pub const PRINTSCREEN = 70;
+pub const SCROLLLOCK = 71;
+pub const PAUSE = 72;
+pub const INSERT = 73;
+pub const HOME = 74;
+pub const PAGEUP = 75;
+pub const DELETE = 76;
+pub const END = 77;
+pub const PAGEDOWN = 78;
+pub const RIGHT = 79;
+pub const LEFT = 80;
+pub const DOWN = 81;
+pub const UP = 82;
 
-    PRINTSCREEN = 70,
-    SCROLLLOCK = 71,
-    PAUSE = 72,
-    INSERT = 73, // insert on PC, help on some Mac keyboards (but
-    //    does send code 73, not 117)
-    HOME = 74,
-    PAGEUP = 75,
-    DELETE = 76,
-    END = 77,
-    PAGEDOWN = 78,
-    RIGHT = 79,
-    LEFT = 80,
-    DOWN = 81,
-    UP = 82,
+pub const NUMLOCKCLEAR = 83;
 
-    NUMLOCKCLEAR = 83, // num lock on PC, clear on Mac keyboards
+pub const KP_DIVIDE = 84;
+pub const KP_MULTIPLY = 85;
+pub const KP_MINUS = 86;
+pub const KP_PLUS = 87;
+pub const KP_ENTER = 88;
+pub const KP_1 = 89;
+pub const KP_2 = 90;
+pub const KP_3 = 91;
+pub const KP_4 = 92;
+pub const KP_5 = 93;
+pub const KP_6 = 94;
+pub const KP_7 = 95;
+pub const KP_8 = 96;
+pub const KP_9 = 97;
+pub const KP_0 = 98;
+pub const KP_PERIOD = 99;
 
-    KP_DIVIDE = 84,
-    KP_MULTIPLY = 85,
-    KP_MINUS = 86,
-    KP_PLUS = 87,
-    KP_ENTER = 88,
-    KP_1 = 89,
-    KP_2 = 90,
-    KP_3 = 91,
-    KP_4 = 92,
-    KP_5 = 93,
-    KP_6 = 94,
-    KP_7 = 95,
-    KP_8 = 96,
-    KP_9 = 97,
-    KP_0 = 98,
-    KP_PERIOD = 99,
+pub const NONUSBACKSLASH = 100;
+pub const APPLICATION = 101;
+pub const POWER = 102;
+pub const KP_EQUALS = 103;
+pub const F13 = 104;
+pub const F14 = 105;
+pub const F15 = 106;
+pub const F16 = 107;
+pub const F17 = 108;
+pub const F18 = 109;
+pub const F19 = 110;
+pub const F20 = 111;
+pub const F21 = 112;
+pub const F22 = 113;
+pub const F23 = 114;
+pub const F24 = 115;
+pub const EXECUTE = 116;
+pub const HELP = 117;
+pub const MENU = 118;
+pub const SELECT = 119;
+pub const STOP = 120;
+pub const AGAIN = 121;
+pub const UNDO = 122;
+pub const CUT = 123;
+pub const COPY = 124;
+pub const PASTE = 125;
+pub const FIND = 126;
+pub const MUTE = 127;
+pub const VOLUMEUP = 128;
+pub const VOLUMEDOWN = 129;
+pub const KP_COMMA = 133;
+pub const KP_EQUALSAS400 = 134;
 
-    NONUSBACKSLASH = 100, // This is the additional key that ISO
-    // keyboards have over ANSI ones,
-    // located between left shift and Y.
-    // Produces GRAVE ACCENT and TILDE in a
-    // US or UK Mac layout, REVERSE SOLIDUS
-    // (backslash) and VERTICAL LINE in a
-    // US or UK Windows layout, and
-    // LESS-THAN SIGN and GREATER-THAN SIGN
-    // in a Swiss German, German, or French
-    // layout.
-    APPLICATION = 101, // windows contextual menu, compose
-    POWER = 102, // The USB document says this is a status flag,
-    //    not a physical key - but some Mac keyboards
-    //    do have a power key.
-    KP_EQUALS = 103,
-    F13 = 104,
-    F14 = 105,
-    F15 = 106,
-    F16 = 107,
-    F17 = 108,
-    F18 = 109,
-    F19 = 110,
-    F20 = 111,
-    F21 = 112,
-    F22 = 113,
-    F23 = 114,
-    F24 = 115,
-    EXECUTE = 116,
-    HELP = 117,
-    MENU = 118,
-    SELECT = 119,
-    STOP = 120,
-    AGAIN = 121, // redo
-    UNDO = 122,
-    CUT = 123,
-    COPY = 124,
-    PASTE = 125,
-    FIND = 126,
-    MUTE = 127,
-    VOLUMEUP = 128,
-    VOLUMEDOWN = 129,
-    // not sure whether there's a reason to enable these
-    //      LOCKINGCAPSLOCK = 130,
-    //      LOCKINGNUMLOCK = 131,
-    //      LOCKINGSCROLLLOCK = 132,
-    KP_COMMA = 133,
-    KP_EQUALSAS400 = 134,
+pub const INTERNATIONAL1 = 135;
+pub const INTERNATIONAL2 = 136;
+pub const INTERNATIONAL3 = 137;
+pub const INTERNATIONAL4 = 138;
+pub const INTERNATIONAL5 = 139;
+pub const INTERNATIONAL6 = 140;
+pub const INTERNATIONAL7 = 141;
+pub const INTERNATIONAL8 = 142;
+pub const INTERNATIONAL9 = 143;
+pub const LANG1 = 144; // Hangul/English toggle
+pub const LANG2 = 145; // Hanja conversion
+pub const LANG3 = 146; // Katakana
+pub const LANG4 = 147; // Hiragana
+pub const LANG5 = 148; // Zenkaku/Hankaku
+pub const LANG6 = 149; // reserved
+pub const LANG7 = 150; // reserved
+pub const LANG8 = 151; // reserved
+pub const LANG9 = 152; // reserved
 
-    INTERNATIONAL1 = 135, // used on Asian keyboards, see
-    // footnotes in USB doc
-    INTERNATIONAL2 = 136,
-    INTERNATIONAL3 = 137, // Yen
-    INTERNATIONAL4 = 138,
-    INTERNATIONAL5 = 139,
-    INTERNATIONAL6 = 140,
-    INTERNATIONAL7 = 141,
-    INTERNATIONAL8 = 142,
-    INTERNATIONAL9 = 143,
-    LANG1 = 144, // Hangul/English toggle
-    LANG2 = 145, // Hanja conversion
-    LANG3 = 146, // Katakana
-    LANG4 = 147, // Hiragana
-    LANG5 = 148, // Zenkaku/Hankaku
-    LANG6 = 149, // reserved
-    LANG7 = 150, // reserved
-    LANG8 = 151, // reserved
-    LANG9 = 152, // reserved
+pub const ALTERASE = 153; // Erase-Eaze
+pub const SYSREQ = 154;
+pub const CANCEL = 155;
+pub const CLEAR = 156;
+pub const PRIOR = 157;
+pub const RETURN2 = 158;
+pub const SEPARATOR = 159;
+pub const OUT = 160;
+pub const OPER = 161;
+pub const CLEARAGAIN = 162;
+pub const CRSEL = 163;
+pub const EXSEL = 164;
 
-    ALTERASE = 153, // Erase-Eaze
-    SYSREQ = 154,
-    CANCEL = 155,
-    CLEAR = 156,
-    PRIOR = 157,
-    RETURN2 = 158,
-    SEPARATOR = 159,
-    OUT = 160,
-    OPER = 161,
-    CLEARAGAIN = 162,
-    CRSEL = 163,
-    EXSEL = 164,
+pub const KP_00 = 176;
+pub const KP_000 = 177;
+pub const THOUSANDSSEPARATOR = 178;
+pub const DECIMALSEPARATOR = 179;
+pub const CURRENCYUNIT = 180;
+pub const CURRENCYSUBUNIT = 181;
+pub const KP_LEFTPAREN = 182;
+pub const KP_RIGHTPAREN = 183;
+pub const KP_LEFTBRACE = 184;
+pub const KP_RIGHTBRACE = 185;
+pub const KP_TAB = 186;
+pub const KP_BACKSPACE = 187;
+pub const KP_A = 188;
+pub const KP_B = 189;
+pub const KP_C = 190;
+pub const KP_D = 191;
+pub const KP_E = 192;
+pub const KP_F = 193;
+pub const KP_XOR = 194;
+pub const KP_POWER = 195;
+pub const KP_PERCENT = 196;
+pub const KP_LESS = 197;
+pub const KP_GREATER = 198;
+pub const KP_AMPERSAND = 199;
+pub const KP_DBLAMPERSAND = 200;
+pub const KP_VERTICALBAR = 201;
+pub const KP_DBLVERTICALBAR = 202;
+pub const KP_COLON = 203;
+pub const KP_HASH = 204;
+pub const KP_SPACE = 205;
+pub const KP_AT = 206;
+pub const KP_EXCLAM = 207;
+pub const KP_MEMSTORE = 208;
+pub const KP_MEMRECALL = 209;
+pub const KP_MEMCLEAR = 210;
+pub const KP_MEMADD = 211;
+pub const KP_MEMSUBTRACT = 212;
+pub const KP_MEMMULTIPLY = 213;
+pub const KP_MEMDIVIDE = 214;
+pub const KP_PLUSMINUS = 215;
+pub const KP_CLEAR = 216;
+pub const KP_CLEARENTRY = 217;
+pub const KP_BINARY = 218;
+pub const KP_OCTAL = 219;
+pub const KP_DECIMAL = 220;
+pub const KP_HEXADECIMAL = 221;
 
-    KP_00 = 176,
-    KP_000 = 177,
-    THOUSANDSSEPARATOR = 178,
-    DECIMALSEPARATOR = 179,
-    CURRENCYUNIT = 180,
-    CURRENCYSUBUNIT = 181,
-    KP_LEFTPAREN = 182,
-    KP_RIGHTPAREN = 183,
-    KP_LEFTBRACE = 184,
-    KP_RIGHTBRACE = 185,
-    KP_TAB = 186,
-    KP_BACKSPACE = 187,
-    KP_A = 188,
-    KP_B = 189,
-    KP_C = 190,
-    KP_D = 191,
-    KP_E = 192,
-    KP_F = 193,
-    KP_XOR = 194,
-    KP_POWER = 195,
-    KP_PERCENT = 196,
-    KP_LESS = 197,
-    KP_GREATER = 198,
-    KP_AMPERSAND = 199,
-    KP_DBLAMPERSAND = 200,
-    KP_VERTICALBAR = 201,
-    KP_DBLVERTICALBAR = 202,
-    KP_COLON = 203,
-    KP_HASH = 204,
-    KP_SPACE = 205,
-    KP_AT = 206,
-    KP_EXCLAM = 207,
-    KP_MEMSTORE = 208,
-    KP_MEMRECALL = 209,
-    KP_MEMCLEAR = 210,
-    KP_MEMADD = 211,
-    KP_MEMSUBTRACT = 212,
-    KP_MEMMULTIPLY = 213,
-    KP_MEMDIVIDE = 214,
-    KP_PLUSMINUS = 215,
-    KP_CLEAR = 216,
-    KP_CLEARENTRY = 217,
-    KP_BINARY = 218,
-    KP_OCTAL = 219,
-    KP_DECIMAL = 220,
-    KP_HEXADECIMAL = 221,
+pub const LCTRL = 224;
+pub const LSHIFT = 225;
+pub const LALT = 226; // alt, option
+pub const LGUI = 227; // windows, command (apple), meta
+pub const RCTRL = 228;
+pub const RSHIFT = 229;
+pub const RALT = 230; // alt gr, option
+pub const RGUI = 231; // windows, command (apple), meta
 
-    LCTRL = 224,
-    LSHIFT = 225,
-    LALT = 226, // alt, option
-    LGUI = 227, // windows, command (apple), meta
-    RCTRL = 228,
-    RSHIFT = 229,
-    RALT = 230, // alt gr, option
-    RGUI = 231, // windows, command (apple), meta
+pub const MODE = 257;
 
-    MODE = 257, // I'm not sure if this is really not covered
-    //  by any of the above, but since there's a
-    //  special KMOD_MODE for it I'm adding it here
+pub const AUDIONEXT = 258;
+pub const AUDIOPREV = 259;
+pub const AUDIOSTOP = 260;
+pub const AUDIOPLAY = 261;
+pub const AUDIOMUTE = 262;
+pub const MEDIASELECT = 263;
+pub const WWW = 264;
+pub const MAIL = 265;
+pub const CALCULATOR = 266;
+pub const COMPUTER = 267;
+pub const AC_SEARCH = 268;
+pub const AC_HOME = 269;
+pub const AC_BACK = 270;
+pub const AC_FORWARD = 271;
+pub const AC_STOP = 272;
+pub const AC_REFRESH = 273;
+pub const AC_BOOKMARKS = 274;
 
-    // Usage page 0x07
+pub const BRIGHTNESSDOWN = 275;
+pub const BRIGHTNESSUP = 276;
+pub const DISPLAYSWITCH = 277;
+pub const KBDILLUMTOGGLE = 278;
+pub const KBDILLUMDOWN = 279;
+pub const KBDILLUMUP = 280;
+pub const EJECT = 281;
+pub const SLEEP = 282;
 
-    //  *  \name Usage page 0x0C
-    //  *
-    //  *  These values are mapped from usage page 0x0C (USB consumer page).
+pub const APP1 = 283;
+pub const APP2 = 284;
 
-    AUDIONEXT = 258,
-    AUDIOPREV = 259,
-    AUDIOSTOP = 260,
-    AUDIOPLAY = 261,
-    AUDIOMUTE = 262,
-    MEDIASELECT = 263,
-    WWW = 264,
-    MAIL = 265,
-    CALCULATOR = 266,
-    COMPUTER = 267,
-    AC_SEARCH = 268,
-    AC_HOME = 269,
-    AC_BACK = 270,
-    AC_FORWARD = 271,
-    AC_STOP = 272,
-    AC_REFRESH = 273,
-    AC_BOOKMARKS = 274,
+pub const AUDIOREWIND = 285;
+pub const AUDIOFASTFORWARD = 286;
 
-    // Usage page 0x0C
-
-    //  *  \name Walther keys
-    //  *
-    //  *  These are values that Christian Walther added (for mac keyboard?).
-
-    BRIGHTNESSDOWN = 275,
-    BRIGHTNESSUP = 276,
-    DISPLAYSWITCH = 277, // display mirroring/dual display
-    //    switch, video mode switch
-    KBDILLUMTOGGLE = 278,
-    KBDILLUMDOWN = 279,
-    KBDILLUMUP = 280,
-    EJECT = 281,
-    SLEEP = 282,
-
-    APP1 = 283,
-    APP2 = 284,
-
-    // Walther keys
-
-    //  *  \name Usage page 0x0C (additional media keys)
-    //  *
-    //  *  These values are mapped from usage page 0x0C (USB consumer page).
-
-    AUDIOREWIND = 285,
-    AUDIOFASTFORWARD = 286,
-
-    // Usage page 0x0C (additional media keys)
-
-    // Add any other keys here.
-
-    SDL_NUM_SCANCODES = 512, // not a key, just marks the number of scancodes
-    //  for array bounds
-};
+pub const SDL_NUM_SCANCODES = 512;

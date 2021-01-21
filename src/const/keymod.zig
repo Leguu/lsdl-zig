@@ -1,23 +1,19 @@
 // Enumeration of valid key mods (possibly OR'd together).
-pub const Keymod = enum(i32) {
-    const Self = @This();
+pub const NONE = 0x0000;
+pub const LSHIFT = 0x0001;
+pub const RSHIFT = 0x0002;
+pub const LCTRL = 0x0040;
+pub const RCTRL = 0x0080;
+pub const LALT = 0x0100;
+pub const RALT = 0x0200;
+pub const LGUI = 0x0400;
+pub const RGUI = 0x0800;
+pub const NUM = 0x1000;
+pub const CAPS = 0x2000;
+pub const MODE = 0x4000;
+pub const RESERVED = 0x8000;
 
-    NONE = 0x0000,
-    LSHIFT = 0x0001,
-    RSHIFT = 0x0002,
-    LCTRL = 0x0040,
-    RCTRL = 0x0080,
-    LALT = 0x0100,
-    RALT = 0x0200,
-    LGUI = 0x0400,
-    RGUI = 0x0800,
-    NUM = 0x1000,
-    CAPS = 0x2000,
-    MODE = 0x4000,
-    RESERVED = 0x8000,
-
-    pub const CTRL = @enumToInt(Self.LCTRL) | @enumToInt(Self.RCTRL);
-    pub const SHIFT = @enumToInt(Self.LSHIFT) | @enumToInt(Self.LSHIFT);
-    pub const ALT = @enumToInt(Self.LALT) | @enumToInt(Self.RALT);
-    pub const GUI = @enumToInt(Self.LGUI) | @enumToInt(Self.RGUI);
-};
+pub const CTRL = @enumToInt(LCTRL) | @enumToInt(RCTRL);
+pub const SHIFT = @enumToInt(LSHIFT) | @enumToInt(LSHIFT);
+pub const ALT = @enumToInt(LALT) | @enumToInt(RALT);
+pub const GUI = @enumToInt(LGUI) | @enumToInt(RGUI);
