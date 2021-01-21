@@ -11,9 +11,8 @@ pub const Input = @import("input.zig").Input;
 pub const Vector = @import("vector.zig").Vector;
 pub const Timer = @import("timer.zig").Timer;
 
-const render = @import("core/render.zig");
-pub const Color = render.Color;
-pub const Render = render.Render;
+pub const Render = @import("core/render.zig").Render;
+pub const Color = @import("color.zig").Color;
 
 pub const Scancode = @import("const/Scancode.zig").Scancode;
 pub const Keycode = @import("const/Keycode.zig").Keycode;
