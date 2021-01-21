@@ -16,6 +16,7 @@ pub const Color = struct {
         return new(0, 0, 0, 255);
     }
 
+    /// Give level as a number out of 255.
     pub fn gray(level: u8) Self {
         return new(level, level, level, 255);
     }
