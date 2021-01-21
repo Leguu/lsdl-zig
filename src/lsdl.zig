@@ -12,6 +12,10 @@ const render = @import("core/render.zig");
 pub const Color = render.Color;
 pub const Render = render.Render;
 
+pub const Scancode = @import("const/Scancode.zig").Scancode;
+pub const Keycode = @import("const/Keycode.zig").Keycode;
+pub const Keymod = @import("const/Keymod.zig").Keymod;
+
 const std = @import("std");
 
 pub fn SDLError() void {
