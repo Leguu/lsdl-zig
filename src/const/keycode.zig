@@ -1,4 +1,5 @@
-const Scancode = @import("Scancode.zig").Scancode;
+const lsdl = @import("../lsdl.zig");
+const Scancode = lsdl.Scancode;
 
 const mask = 1 << 30;
 

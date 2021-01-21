@@ -14,9 +14,9 @@ pub const Timer = @import("timer.zig").Timer;
 pub const Render = @import("core/render.zig").Render;
 pub const Color = @import("color.zig").Color;
 
-pub const Scancode = @import("const/Scancode.zig").Scancode;
-pub const Keycode = @import("const/Keycode.zig").Keycode;
-pub const Keymod = @import("const/Keymod.zig").Keymod;
+pub const Scancode = @import("const/scancode.zig").Scancode;
+pub const Keycode = @import("const/keycode.zig").Keycode;
+pub const Keymod = @import("const/keymod.zig").Keymod;
 
 const std = @import("std");
 
