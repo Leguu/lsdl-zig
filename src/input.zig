@@ -19,11 +19,11 @@ pub const Input = struct {
         }
     }
 
-    pub fn mouse_pressed(self: *Self) bool {
+    pub fn mousePressed(self: *Self) bool {
         return lsdl.SDL_GetMouseState(0, 0) == 1;
     }
 
-    pub fn mouse_position(self: *Self, comptime T: type) Vector(T) {
+    pub fn mousePosition(self: *Self, comptime T: type) Vector(T) {
         var x: i32 = undefined;
         var y: i32 = undefined;
         _ = lsdl.SDL_GetMouseState(&x, &y);
