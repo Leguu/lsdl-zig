@@ -1,6 +1,8 @@
 const std = @import("std");
 const time = std.time;
 
+/// A Struct for all time-dependent calulations.
+/// Also provides functionality for FPS moderation.
 pub const Timer = struct {
     timer: time.Timer,
     previous: u64 = 0,
@@ -19,7 +21,7 @@ pub const Timer = struct {
         return self.timer.read() - self.previous > fpns;
     }
 
-    // Delta-time in nanoseconds
+    /// Delta-time in nanoseconds.
     pub fn deltaTime(self: *Self, comptime T: type) T {
         const dt = self.timer.read() - self.previous;
         return std.math.lossyCast(T, dt);

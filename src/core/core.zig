@@ -6,6 +6,9 @@ const lsdl = @import("../lsdl.zig");
 const Window = @import("window.zig").Window;
 const Render = @import("render.zig").Render;
 
+/// The "core" of all lsdl functionality.
+/// This is where you'll access most of the utilities provided by this library.
+/// Initialize this struct to begin using the library!
 pub const Core = struct {
     window: Window,
     render: Render,

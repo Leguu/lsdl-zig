@@ -14,6 +14,7 @@ pub const Window = struct {
         return Self{ .window = window };
     }
 
+    /// Get the current window size as a struct.
     pub fn size(self: *Self, comptime T: type) struct {
         width: T, height: T
     } {

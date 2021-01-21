@@ -1,12 +1,15 @@
+//! The main lsdl library file. Import this for your use.
+
+// All C Imports, in case you need to use them.
 usingnamespace @cImport({
     @cInclude("SDL2/SDL.h");
 });
 
+pub const Core = @import("core/core.zig").Core;
+
 pub const Input = @import("input.zig").Input;
 pub const Vector = @import("vector.zig").Vector;
 pub const Timer = @import("timer.zig").Timer;
-
-pub const Core = @import("core/core.zig").Core;
 
 const render = @import("core/render.zig");
 pub const Color = render.Color;

@@ -3,6 +3,8 @@ const lsdl = @import("../lsdl.zig");
 
 const Window = @import("window.zig").Window;
 
+/// A Color struct with a few default values.
+/// May move the default color values to an enum later.
 pub const Color = struct {
     red: u8,
     green: u8,
@@ -69,6 +71,8 @@ pub const Render = struct {
         return color;
     }
 
+    /// Clears the screen with specified color.
+    /// Does not change current color.
     pub fn clear(self: *Self, color: Color) void {
         const old = self.getColor();
         self.setDrawColor(color);

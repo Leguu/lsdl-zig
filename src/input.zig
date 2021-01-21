@@ -3,6 +3,7 @@ const math = @import("std").math;
 const lsdl = @import("lsdl.zig");
 const Vector = lsdl.Vector;
 
+/// Provides functionalities relating to SDL2's inputs.
 pub const Input = struct {
     pub fn poll() ?lsdl.SDL_Event {
         var event: lsdl.SDL_Event = undefined;
