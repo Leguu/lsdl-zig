@@ -2,6 +2,7 @@
 
 // All C Imports, in case you need to use them.
 usingnamespace @cImport({
+    @cInclude("SDL2/SDL_image.h");
     @cInclude("SDL2/SDL.h");
 });
 
@@ -9,6 +10,7 @@ pub const Core = @import("core/core.zig").Core;
 
 pub const input = @import("input.zig");
 
+pub const Image = @import("image.zig").Image;
 pub const Vector = @import("vector.zig").Vector;
 pub const Timer = @import("timer.zig").Timer;
 
@@ -24,4 +26,8 @@ const std = @import("std");
 
 pub fn SDLError() void {
     std.debug.panic("An SDL Error has Occured! Error code: {}\n", .{SDL_GetError().*});
+}
+
+pub fn IMGError() void {
+    std.debug.panic("An Image Error has Occured! Error code: {}\n", .{IMG_GetError().*});
 }
