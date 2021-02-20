@@ -39,7 +39,7 @@ pub const Render = struct {
     }
 
     pub fn getColor(self: *Self) Color {
-        var color = Color.black();
+        var color = Color.black;
         if (lsdl.SDL_GetRenderDrawColor(self.renderer, &color.red, &color.green, &color.blue, &color.alpha) < 0)
             lsdl.SDLError();
         return color;

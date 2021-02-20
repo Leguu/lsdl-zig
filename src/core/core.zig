@@ -22,6 +22,8 @@ pub const Core = struct {
             std.debug.panic("Error has occured initializing SDL: {}\n", .{lsdl.SDL_GetError()});
         }
 
+        _ = lsdl.IMG_Init(lsdl.IMG_INIT_PNG);
+
         const window = Window.new(width, height);
 
         const render = Render.new(window);
@@ -33,6 +35,9 @@ pub const Core = struct {
     }
 
     pub fn cleanup(self: *Self) void {
+        lsdl.SDL_DestroyRenderer(self.render.renderer);
+        lsdl.SDL_DestroyWindow(self.window.window);
         lsdl.SDL_Quit();
+        lsdl.IMG_Quit();
     }
 };

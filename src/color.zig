@@ -12,16 +12,15 @@ pub const Color = struct {
         return Self{ .red = red, .green = green, .blue = blue, .alpha = alpha };
     }
 
-    pub fn black() Self {
-        return new(0, 0, 0, 255);
-    }
+    pub const black = new(0, 0, 0, 225);
+    pub const white = new(255, 255, 255, 255);
+
+    pub const light_gray = new(190, 190, 190, 255);
+    pub const gray = new(127, 127, 127, 255);
+    pub const dark_gray = new(64, 64, 64, 255);
 
     /// Give level as a number out of 255.
-    pub fn gray(level: u8) Self {
+    pub fn uniform(level: u8) Self {
         return new(level, level, level, 255);
-    }
-
-    pub fn white() Self {
-        return new(255, 255, 255, 255);
     }
 };

@@ -1,5 +1,5 @@
 const std = @import("std");
-const lsdl = @import("lsdl.zig");
+const lsdl = @import("../lsdl.zig");
 
 pub const Image = struct {
     texture: *lsdl.SDL_Texture,

@@ -10,7 +10,9 @@ pub const Core = @import("core/core.zig").Core;
 
 pub const input = @import("input.zig");
 
-pub const Image = @import("image.zig").Image;
+pub const Image = @import("img/image.zig").Image;
+pub const Spritesheet = @import("img/spritesheet.zig").Spritesheet;
+
 pub const Vector = @import("vector.zig").Vector;
 pub const Timer = @import("timer.zig").Timer;
 
