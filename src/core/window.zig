@@ -8,7 +8,7 @@ pub const Window = struct {
 
     pub fn new(window_width: i32, window_height: i32) Self {
         const window = lsdl.SDL_CreateWindow(0, 0, 0, window_width, window_height, 0) orelse {
-            std.debug.panic("Error has occured creating window: {}\n", .{lsdl.SDL_GetError()});
+            std.debug.panic("Error has occured creating window: {}\n", .{lsdl.SDL_GetError().*});
         };
 
         return Self{ .window = window };

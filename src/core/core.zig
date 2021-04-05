@@ -19,7 +19,7 @@ pub const Core = struct {
 
     pub fn new(width: i32, height: i32) Self {
         if (lsdl.SDL_Init(lsdl.SDL_INIT_VIDEO) != 0) {
-            std.debug.panic("Error has occured initializing SDL: {}\n", .{lsdl.SDL_GetError()});
+            std.debug.panic("Error has occured initializing SDL: {}\n", .{lsdl.SDL_GetError().*});
         }
 
         _ = lsdl.IMG_Init(lsdl.IMG_INIT_PNG);

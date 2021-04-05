@@ -11,7 +11,7 @@ pub const Render = struct {
 
     pub fn new(window: Window) Self {
         const renderer = lsdl.SDL_CreateRenderer(window.window, -1, lsdl.SDL_RENDERER_ACCELERATED) orelse {
-            std.debug.panic("Error has occured creating renderer: {}\n", .{lsdl.SDL_GetError()});
+            std.debug.panic("Error has occured creating renderer: {}\n", .{lsdl.SDL_GetError().*});
         };
 
         return Self{ .renderer = renderer };
