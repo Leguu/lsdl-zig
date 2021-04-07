@@ -4,7 +4,7 @@ Convenience Zig wrapper for SDL2. This library provides a few additional feature
 
 I am currently planning to make this library more game-friendly. Functionality relating to images and audio is planned. If you wish to use SDL features that are not included in lsdl, you can access the C functions directly in `lsdl.zig`, for example, `lsdl.SDL_JoystickGetBall(...)`.
 
-Since this is for convenience, do not expect performance - for that, you can import SDL2 directly. Some of the library is documented, however, it's a fairly simple library so you should be able to understand it even without comments.
+Since this is for convenience, do not expect performance - for that, you can import SDL2 directly. Some of the library is documented, however, it's fairly simple, so you should be able to understand it even without comments.
 
 ## Use
 
@@ -18,3 +18,11 @@ pub fn build(b: *Builder) void {
     // ...
 }
 ```
+
+## Todo
+
+- Spritesheet and animation classes
+- Fix `timer.zig` (use accumulators and wait to minimize CPU use)
+- Event system
+- Implement interfaces
+- Implement physics engine
