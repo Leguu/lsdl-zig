@@ -6,6 +6,9 @@ usingnamespace @cImport({
     @cInclude("SDL2/SDL.h");
 });
 
+/// Size for various constructs
+pub const Size = Vector(i32);
+
 pub const Core = @import("core/core.zig").Core;
 
 pub const input = @import("input.zig");

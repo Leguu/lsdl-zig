@@ -17,14 +17,14 @@ pub const Core = struct {
 
     const Self = @This();
 
-    pub fn new(width: i32, height: i32) Self {
+    pub fn new(size: lsdl.Size) Self {
         if (lsdl.SDL_Init(lsdl.SDL_INIT_VIDEO) != 0) {
             std.debug.panic("Error has occured initializing SDL: {}\n", .{lsdl.SDL_GetError().*});
         }
 
         _ = lsdl.IMG_Init(lsdl.IMG_INIT_PNG);
 
-        const window = Window.new(width, height);
+        const window = Window.new(size);
 
         const render = Render.new(window);
 

@@ -18,15 +18,12 @@ pub const Image = struct {
         return Self{ .texture = texture.? };
     }
 
-    pub fn size(self: *const Self, comptime T: type) struct {
-        width: T, height: T
-    } {
-        var width: i32 = 0;
-        var height: i32 = 0;
+    pub fn size(self: *const Self) lsdl.Size {
+        var tsize = lsdl.Size.zero();
 
-        if (lsdl.SDL_QueryTexture(self.texture, 0, 0, &width, &height) < 0) lsdl.SDLError();
+        if (lsdl.SDL_QueryTexture(self.texture, 0, 0, &tsize.x, &tsize.y) < 0) lsdl.SDLError();
 
-        return .{ .width = std.math.lossyCast(T, width), .height = std.math.lossyCast(T, height) };
+        return tsize;
     }
 
     pub fn draw(self: *const Self, render: lsdl.Render) void {
@@ -34,13 +31,13 @@ pub const Image = struct {
     }
 
     pub fn drawScale(self: *const Self, render: lsdl.Render, pos: lsdl.Vector(f32), scale: f32) void {
-        const tsize = self.size(f32);
+        const tsize = self.size().lossyCast(f32);
 
         const rectangle = lsdl.SDL_FRect{
             .x = pos.x,
             .y = pos.y,
-            .w = tsize.width * scale,
-            .h = tsize.height * scale,
+            .w = tsize.x * scale,
+            .h = tsize.y * scale,
         };
 
         if (lsdl.SDL_RenderCopyF(render.renderer, self.texture, 0, &rectangle) < 0) lsdl.SDLError();
