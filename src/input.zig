@@ -25,9 +25,8 @@ pub fn mousePressed() MouseState {
     return @intToEnum(MouseState, lsdl.SDL_GetMouseState(0, 0));
 }
 
-pub fn mousePosition(comptime T: type) Vector(T) {
-    var x: i32 = undefined;
-    var y: i32 = undefined;
-    _ = lsdl.SDL_GetMouseState(&x, &y);
-    return Vector(T).new(math.lossyCast(T, x), math.lossyCast(T, y));
+pub fn mousePosition() Vector(i32) {
+    var pos = Vector(i32).zero();
+    _ = lsdl.SDL_GetMouseState(&pos.x, &pos.y);
+    return pos;
 }

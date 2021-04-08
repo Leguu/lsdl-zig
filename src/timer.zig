@@ -17,7 +17,7 @@ pub const Timer = struct {
         return Self{ .timer = try time.Timer.start() };
     }
 
-    pub fn wait(self: *Self) void {
+    pub fn wait(self: Self) void {
         if (self.accumulator < step)
             lsdl.SDL_Delay(@intCast(u32, (step - self.accumulator) / time.ns_per_ms));
     }
@@ -33,7 +33,7 @@ pub const Timer = struct {
     }
 
     /// Delta-time in nanoseconds.
-    pub fn deltaTime(self: *Self) u64 {
+    pub fn deltaTime(self: Self) u64 {
         return step;
     }
 

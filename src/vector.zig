@@ -37,7 +37,10 @@ pub fn Vector(comptime T: type) type {
         }
 
         pub fn divide(self: Self, other: Self) Self {
-            return new(self.x / other.x, self.y / other.y);
+            switch (@typeInfo(T)) {
+                .Int => return new(@divExact(self.x, other.x), @divExact(self.y, other.y)),
+                else => return new(self.x / other.x, self.y / other.y),
+            }
         }
 
         pub fn rescale(self: Self, amount: T) Self {
@@ -46,6 +49,10 @@ pub fn Vector(comptime T: type) type {
 
         pub fn length(self: Self) T {
             return math.sqrt(math.pow(T, self.x, 2) + math.pow(T, self.y, 2));
+        }
+
+        pub fn square(self: Self) T {
+            return self.x * self.y;
         }
 
         /// Normalizes this Vector.

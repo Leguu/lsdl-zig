@@ -37,17 +37,13 @@ pub const Image = struct {
         self.size = self.size.rescale(scale);
     }
 
-    pub fn draw(self: *const Self, render: lsdl.Render) void {
-        if (lsdl.SDL_RenderCopy(render.renderer, self.texture, 0, 0) < 0) lsdl.SDLError();
-    }
-
-    pub fn drawScale(self: *const Self, render: lsdl.Render, pos: lsdl.Vector(f32)) void {
+    pub fn draw(self: Self, render: lsdl.Render, pos: lsdl.Vector(f32)) void {
         const rectangle = lsdl.SDL_FRect{ .x = pos.x, .y = pos.y, .w = self.size.x, .h = self.size.y };
 
         if (lsdl.SDL_RenderCopyF(render.renderer, self.texture, 0, &rectangle) < 0) lsdl.SDLError();
     }
 
-    pub fn drawPart(self: *const Self, render: lsdl.Render, pos: lsdl.Vector(f32), srcpos: lsdl.Size, tsize: lsdl.Size) void {
+    pub fn drawPart(self: Self, render: lsdl.Render, pos: lsdl.Vector(f32), srcpos: lsdl.Size, tsize: lsdl.Size) void {
         const src = lsdl.SDL_Rect{ .x = srcpos.x, .y = srcpos.y, .w = tsize.x, .h = tsize.y };
         const dest = lsdl.SDL_FRect{ .x = pos.x, .y = pos.y, .w = self.size.x, .h = self.size.x };
 

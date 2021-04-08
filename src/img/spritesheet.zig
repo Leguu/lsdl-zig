@@ -4,9 +4,8 @@ const lsdl = @import("../lsdl.zig");
 pub const Spritesheet = struct {
     image: lsdl.Image,
     sprite_size: lsdl.Size,
-    width: usize,
-    height: usize,
-    length: usize,
+    index_size: lsdl.Size,
+    length: i32,
 
     const Self = @This();
 
@@ -14,29 +13,27 @@ pub const Spritesheet = struct {
     /// TODO: Allow non-pixel measures for sprites?
     pub fn new(image: lsdl.Image, sprite_size: lsdl.Size) Self {
         const size = image.texture_size.lossyCast(i32);
-        const width = @divExact(size.x, sprite_size.x);
-        const height = @divExact(size.y, sprite_size.y);
+        const index_size = size.divide(sprite_size);
 
         return .{
             .image = image,
             .sprite_size = sprite_size,
-            .width = @intCast(usize, width),
-            .height = @intCast(usize, height),
-            .length = @intCast(usize, width * height),
+            .index_size = index_size,
+            .length = index_size.square(),
         };
     }
 
     /// Get the position in the spritesheet at the index
-    pub fn get(self: *const Self, index: usize) !lsdl.Size {
+    pub fn get(self: Self, index: i32) !lsdl.Size {
         if (index > self.length) {
             return error.IndexOutOfBounds;
         }
-        const x = (index % self.width) * @intCast(usize, self.sprite_size.x);
-        const y = @divTrunc(index, self.width) * @intCast(usize, self.sprite_size.y);
-        return lsdl.Size.new(@intCast(i32, x), @intCast(i32, y));
+        const x = self.sprite_size.x * @rem(index, self.sprite_size.x);
+        const y = self.sprite_size.y * @divTrunc(index, self.index_size.x);
+        return lsdl.Size.new(x, y);
     }
 
-    pub fn draw(self: *const Self, render: lsdl.Render, pos: lsdl.Vector(f32), index: usize) !void {
+    pub fn draw(self: Self, render: lsdl.Render, pos: lsdl.Vector(f32), index: i32) !void {
         self.image.drawPart(render, pos, try self.get(index), self.sprite_size);
     }
 };
