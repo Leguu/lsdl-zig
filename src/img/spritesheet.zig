@@ -37,7 +37,7 @@ pub const Spritesheet = struct {
         return lsdl.Size.new(@intCast(i32, x), @intCast(i32, y));
     }
 
-    pub fn draw(self: *const Self, render: lsdl.Render, pos: lsdl.Vector(f32), index: usize) !void {
-        self.image.drawPart(render, pos, try self.get(index), self.sprite_size);
+    pub fn draw(self: *const Self, render: lsdl.Render, pos: lsdl.Vector(f32), index: usize, scale: f32) !void {
+        self.image.drawPartScale(render, pos, try self.get(index), self.sprite_size, scale);
     }
 };

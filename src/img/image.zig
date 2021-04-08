@@ -60,4 +60,22 @@ pub const Image = struct {
 
         if (lsdl.SDL_RenderCopyF(render.renderer, self.texture, &src, &dest) < 0) lsdl.SDLError();
     }
+
+    pub fn drawPartScale(self: *const Self, render: lsdl.Render, pos: lsdl.Vector(f32), srcpos: lsdl.Size, tsize: lsdl.Size, scale: f32) void {
+        const src = lsdl.SDL_Rect{
+            .x = srcpos.x,
+            .y = srcpos.y,
+            .w = tsize.x,
+            .h = tsize.y,
+        };
+
+        const dest = lsdl.SDL_FRect{
+            .x = pos.x,
+            .y = pos.y,
+            .w = @intToFloat(f32, tsize.x) * scale,
+            .h = @intToFloat(f32, tsize.y) * scale,
+        };
+
+        if (lsdl.SDL_RenderCopyF(render.renderer, self.texture, &src, &dest) < 0) lsdl.SDLError();
+    }
 };
