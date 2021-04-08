@@ -34,7 +34,7 @@ pub const Timer = struct {
 
     /// Delta-time in nanoseconds.
     pub fn deltaTime(self: *Self) u64 {
-        return dt;
+        return step;
     }
 
     pub fn tick(self: *Self) void {

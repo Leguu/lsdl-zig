@@ -18,7 +18,7 @@ pub const Window = struct {
     pub fn size(self: *Self) lsdl.Size {
         var tsize = lsdl.Size.zero();
 
-        lsdl.SDL_GetWindowSize(self.window, &tsize.width, &tsize.height);
+        lsdl.SDL_GetWindowSize(self.window, &tsize.x, &tsize.y);
 
         return tsize;
     }

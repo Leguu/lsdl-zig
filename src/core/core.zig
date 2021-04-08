@@ -13,8 +13,6 @@ pub const Core = struct {
     window: Window,
     render: Render,
 
-    pub const input = lsdl.Input;
-
     const Self = @This();
 
     pub fn new(size: lsdl.Size) Self {
