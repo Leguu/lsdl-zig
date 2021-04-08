@@ -4,7 +4,7 @@ const Keycode = lsdl.Keycode;
 const Keymod = lsdl.Keymod;
 
 test "core functionality" {
-    _ = lsdl.Core.new(0, 0);
+    _ = lsdl.Core.new(lsdl.Size.zero());
 }
 
 test "math functionality" {
@@ -16,12 +16,12 @@ test "timer functionality" {
 }
 
 test "input functionality" {
-    _ = lsdl.Input.keyboardPressed(Scancode.B);
-    _ = lsdl.Input.mousePressed();
+    _ = lsdl.input.keyboardPressed(lsdl.scancode.B);
+    _ = lsdl.input.mousePressed();
 }
 
 test "keycodes" {
-    const somekeycode = Keycode.a;
-    const somescancode = Scancode.LEFT;
-    const somekeymod = Keymod.CTRL;
+    const somekeycode = lsdl.keycode.a;
+    const somescancode = lsdl.scancode.LEFT;
+    const somekeymod = lsdl.keymod.CTRL;
 }

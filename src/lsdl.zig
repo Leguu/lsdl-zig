@@ -9,24 +9,41 @@ usingnamespace @cImport({
 /// Size for various constructs
 pub const Size = Vector(i32);
 
+//
+// Core and engine
+//
 pub const Core = @import("core/core.zig").Core;
-
-pub const input = @import("input.zig");
-
-pub const Image = @import("img/image.zig").Image;
-pub const Spritesheet = @import("img/spritesheet.zig").Spritesheet;
 
 pub const Vector = @import("vector.zig").Vector;
 pub const Timer = @import("timer.zig").Timer;
 
+//
+// Visuals
+//
 pub const Render = @import("core/render.zig").Render;
 pub const Color = @import("color.zig").Color;
 
-pub const events = @import("const/events.zig");
-pub const scancode = @import("const/scancode.zig");
-pub const keycode = @import("const/keycode.zig");
-pub const keymod = @import("const/keymod.zig");
+pub const Image = @import("img/image.zig").Image;
+pub const Spritesheet = @import("img/spritesheet.zig").Spritesheet;
 
+//
+// Constants and input
+//
+pub const input = @import("input.zig");
+pub const events = @import("const/events.zig");
+
+pub const scancode = @import("const/scancode.zig");
+pub const Scancode = usize;
+
+pub const keycode = @import("const/keycode.zig");
+pub const Keycode = usize;
+
+pub const keymod = @import("const/keymod.zig");
+pub const Keymod = usize;
+
+//
+// Utility functions
+//
 const std = @import("std");
 
 pub fn SDLError() void {

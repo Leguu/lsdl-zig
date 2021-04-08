@@ -16,12 +16,10 @@ pub fn poll() ?lsdl.SDL_Event {
 
 pub fn keyboardPressed(scancode: lsdl.Scancode) bool {
     const states: [*c]const u8 = lsdl.SDL_GetKeyboardState(0);
-    return states[@intCast(usize, @enumToInt(scancode))] == 1;
+    return states[@intCast(usize, (scancode))] == 1;
 }
 
-pub const MouseState = enum(u32) {
-    None, Left, Middle, Right
-};
+pub const MouseState = enum(u32) { None, Left, Middle, Right };
 
 pub fn mousePressed() MouseState {
     return @intToEnum(MouseState, lsdl.SDL_GetMouseState(0, 0));

@@ -13,7 +13,7 @@ pub const CAPS = 0x2000;
 pub const MODE = 0x4000;
 pub const RESERVED = 0x8000;
 
-pub const CTRL = @enumToInt(LCTRL) | @enumToInt(RCTRL);
-pub const SHIFT = @enumToInt(LSHIFT) | @enumToInt(LSHIFT);
-pub const ALT = @enumToInt(LALT) | @enumToInt(RALT);
-pub const GUI = @enumToInt(LGUI) | @enumToInt(RGUI);
+pub const CTRL = (LCTRL) | (RCTRL);
+pub const SHIFT = (LSHIFT) | (LSHIFT);
+pub const ALT = (LALT) | (RALT);
+pub const GUI = (LGUI) | (RGUI);
