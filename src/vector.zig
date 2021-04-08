@@ -37,7 +37,7 @@ pub fn Vector(comptime T: type) type {
         }
 
         pub fn divide(self: Self, other: Self) Self {
-            return new(self.x / other.x, self.y * other.y);
+            return new(self.x / other.x, self.y / other.y);
         }
 
         pub fn rescale(self: Self, amount: T) Self {
