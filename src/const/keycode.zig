@@ -4,7 +4,7 @@ const Scancode = lsdl.Scancode;
 const mask = 1 << 30;
 
 fn convertScancode(comptime scancode: Scancode) comptime_int {
-    return @enumToInt(scancode) | mask;
+    return (scancode) | mask;
 }
 
 pub const UNKNOWN = 0;

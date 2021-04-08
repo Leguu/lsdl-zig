@@ -12,19 +12,20 @@ pub const Size = Vector(i32);
 //
 // Core and engine
 //
-pub const Core = @import("core/core.zig").Core;
+pub const Core = @import("core/Core.zig");
 
 pub const Vector = @import("vector.zig").Vector;
-pub const Timer = @import("timer.zig").Timer;
+pub const Timer = @import("Timer.zig");
 
 //
 // Visuals
 //
-pub const Render = @import("core/render.zig").Render;
-pub const Color = @import("color.zig").Color;
+pub const Window = @import("core/Window.zig");
+pub const Render = @import("core/Render.zig");
+pub const Color = @import("Color.zig");
 
-pub const Image = @import("img/image.zig").Image;
-pub const Spritesheet = @import("img/spritesheet.zig").Spritesheet;
+pub const Image = @import("img/Image.zig");
+pub const Spritesheet = @import("img/Spritesheet.zig");
 
 //
 // Constants and input
