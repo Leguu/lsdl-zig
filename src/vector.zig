@@ -67,11 +67,11 @@ pub fn Vector(comptime T: type) type {
             self.* = self.add(direction.rescale(percent));
         }
 
-        pub fn equals(self: *Self, other: Self) bool {
+        pub fn equals(self: Self, other: Self) bool {
             return self.x == other.x and self.y == other.y;
         }
 
-        pub fn lossyCast(self: *Self, comptime N: type) Vector(N) {
+        pub fn lossyCast(self: Self, comptime N: type) Vector(N) {
             return Vector(N).new(std.math.lossyCast(N, self.x), std.math.lossyCast(N, self.y));
         }
     };
