@@ -26,6 +26,7 @@ pub const Color = @import("Color.zig");
 
 pub const Image = @import("img/Image.zig");
 pub const Spritesheet = @import("img/Spritesheet.zig");
+pub const Animation = @import("img/Animation.zig");
 
 //
 // Constants and input
