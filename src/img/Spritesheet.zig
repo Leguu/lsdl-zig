@@ -24,10 +24,10 @@ pub fn new(image: lsdl.Image, sprite_size: lsdl.Size) Self {
 
 /// Get the position in the spritesheet at the index
 pub fn get(self: Self, index: i32) !lsdl.Size {
-    if (index > self.length) {
+    if (index >= self.length) {
         return error.IndexOutOfBounds;
     }
-    const x = self.sprite_size.x * @rem(index, self.sprite_size.x);
+    const x = self.sprite_size.x * @rem(index, self.index_size.x);
     const y = self.sprite_size.y * @divTrunc(index, self.index_size.x);
     return lsdl.Size.new(x, y);
 }

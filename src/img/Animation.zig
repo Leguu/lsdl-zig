@@ -26,14 +26,15 @@ pub fn tick(self: *Self, dt: u64) void {
 }
 
 pub fn drawFrame(self: *Self, render: lsdl.Render, pos: lsdl.Vector(f32), dt: u64) !void {
+    try self.spritesheet.draw(render, pos, self.index);
+
     if (self.accumulator < self.animation_length) {
         self.accumulator += dt;
         return;
     }
 
-    if (self.index > self.spritesheet.length) self.index = 0;
-
-    try self.spritesheet.draw(render, pos, self.index);
     self.accumulator -= self.animation_length;
     self.index += 1;
+
+    if (self.index >= self.spritesheet.length) self.index = 0;
 }
