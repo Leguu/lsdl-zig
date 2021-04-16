@@ -3,7 +3,7 @@ const lsdl = @import("../lsdl.zig");
 
 texture: *lsdl.SDL_Texture,
 texture_size: lsdl.Size,
-size: lsdl.Vector(f32),
+scale: f32 = 1,
 
 const Self = @This();
 
@@ -22,13 +22,12 @@ pub fn load(render: lsdl.Render, path: [*c]const u8) Self {
     return Self{
         .texture = texture.?,
         .texture_size = tsize,
-        .size = tsize.lossyCast(f32),
     };
 }
 
 pub fn loadScale(render: lsdl.Render, path: [*c]const u8, scale: f32) Self {
     var self = load(render, path);
-    self.setScale(scale);
+    self.scale = scale;
     return self;
 }
 
@@ -36,7 +35,11 @@ pub fn setScale(self: *Self, scale: f32) void {
     self.size = self.size.rescale(scale);
 }
 
-pub fn draw(self: Self, render: lsdl.Render, pos: lsdl.Vector(f32)) void {
+pub fn size(self: Self) lsdl.Vector(f32) {
+    return self.texture_size.lossyCast(f32).rescale(scale);
+}
+
+pub fn draw(self: Self, render: lsdl.Render, pos: lsdl.Vector(f32), opts: anytype) void {
     const rectangle = lsdl.SDL_FRect{ .x = pos.x, .y = pos.y, .w = self.size.x, .h = self.size.y };
 
     if (lsdl.SDL_RenderCopyF(render.renderer, self.texture, 0, &rectangle) < 0) lsdl.SDLError();
@@ -44,7 +47,8 @@ pub fn draw(self: Self, render: lsdl.Render, pos: lsdl.Vector(f32)) void {
 
 pub fn drawPart(self: Self, render: lsdl.Render, pos: lsdl.Vector(f32), srcpos: lsdl.Size, tsize: lsdl.Size) void {
     const src = lsdl.SDL_Rect{ .x = srcpos.x, .y = srcpos.y, .w = tsize.x, .h = tsize.y };
-    const dest = lsdl.SDL_FRect{ .x = pos.x, .y = pos.y, .w = self.size.x, .h = self.size.x };
+    const tsize_cast = tsize.lossyCast(f32).rescale(self.scale);
+    const dest = lsdl.SDL_FRect{ .x = pos.x, .y = pos.y, .w = tsize_cast.x, .h = tsize_cast.y };
 
     if (lsdl.SDL_RenderCopyF(render.renderer, self.texture, &src, &dest) < 0) lsdl.SDLError();
 }

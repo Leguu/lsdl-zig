@@ -55,3 +55,9 @@ pub fn SDLError() void {
 pub fn IMGError() void {
     std.debug.panic("An Image Error has Occured! Error code: {}\n", .{IMG_GetError().*});
 }
+
+pub fn bound(value: anytype, start: anytype, end: anytype) @TypeOf(value, start, end) {
+    return if (start <= value and value <= end) value 
+           else if (value < start) start
+           else end;
+}

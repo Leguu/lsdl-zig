@@ -21,8 +21,11 @@ pub fn build(b: *Builder) void {
 
 ## Todo
 
-- Spritesheet and animation classes
-- Fix `timer.zig` (use accumulators and wait to minimize CPU use)
-- Event system
-- Implement interfaces
-- Implement physics engine
+- [ ] Spritesheet and animation classes
+- [x] Fix `timer.zig` (use accumulators and wait to minimize CPU use)
+- [ ] Event system
+- [ ] Implement interfaces
+- [ ] Implement physics engine
+- [ ] Particle engine?
+- [ ] Bounding box image utility
+- [ ] Refactor input and constants to use enums

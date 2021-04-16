@@ -11,8 +11,8 @@ const Self = @This();
 /// sprite_size has to be the size in pixels of each sprite
 /// TODO: Allow non-pixel measures for sprites?
 pub fn new(image: lsdl.Image, sprite_size: lsdl.Size) Self {
-    const size = image.texture_size.lossyCast(i32);
-    const index_size = size.divide(sprite_size);
+    const tsize = image.texture_size.lossyCast(i32);
+    const index_size = tsize.divide(sprite_size);
 
     return .{
         .image = image,
@@ -20,6 +20,10 @@ pub fn new(image: lsdl.Image, sprite_size: lsdl.Size) Self {
         .index_size = index_size,
         .length = index_size.square(),
     };
+}
+
+pub fn size(self: Self) lsdl.Vector(f32) {
+    return self.sprite_size.lossyCast(f32).rescale(self.image.scale);
 }
 
 /// Get the position in the spritesheet at the index
