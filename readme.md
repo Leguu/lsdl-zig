@@ -21,7 +21,7 @@ pub fn build(b: *Builder) void {
 
 ## Todo
 
-- [ ] Spritesheet and animation classes
+- [x] Spritesheet and animation classes
 - [x] Fix `timer.zig` (use accumulators and wait to minimize CPU use)
 - [ ] Event system
 - [ ] Implement interfaces
@@ -29,3 +29,4 @@ pub fn build(b: *Builder) void {
 - [ ] Particle engine?
 - [ ] Bounding box image utility
 - [ ] Refactor input and constants to use enums
+- [ ] Re-write entire library to use structs closer to SDL
