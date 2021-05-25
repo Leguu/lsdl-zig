@@ -21,8 +21,14 @@ pub fn drawLine(self: *Self, x: f32, y: f32, targetX: f32, targetY: f32) void {
         lsdl.SDLError();
 }
 
-pub fn drawRectangle(self: *Self, x: f32, y: f32, width: f32, height: f32) void {
-    const rectangle = lsdl.SDL_FRect{ .x = x, .y = y, .w = width, .h = height };
+pub fn drawRectangleSize(self: *Self, pos: lsdl.Size, size: lsdl.Size) void {
+    const rectangle = lsdl.SDL_Rect{ .x = pos.x, .y = pos.y, .w = size.x, .h = size.y };
+    if (lsdl.SDL_RenderDrawRect(self.renderer, &rectangle) < 0)
+        lsdl.SDLError();
+}
+
+pub fn drawRectangle(self: *Self, pos: lsdl.Vector(f32), size: lsdl.Vector(f32)) void {
+    const rectangle = lsdl.SDL_FRect{ .x = pos.x, .y = pos.y, .w = size.x, .h = size.y };
     if (lsdl.SDL_RenderDrawRectF(self.renderer, &rectangle) < 0)
         lsdl.SDLError();
 }

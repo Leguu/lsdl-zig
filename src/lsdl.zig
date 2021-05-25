@@ -2,8 +2,9 @@
 
 // All C Imports, in case you need to use them.
 usingnamespace @cImport({
-    @cInclude("SDL2/SDL_image.h");
     @cInclude("SDL2/SDL.h");
+    @cInclude("SDL2/SDL_ttf.h");
+    @cInclude("SDL2/SDL_image.h");
 });
 
 /// Size for various constructs
@@ -14,8 +15,9 @@ pub const Size = Vector(i32);
 //
 pub const Core = @import("core/Core.zig");
 
-pub const Vector = @import("vector.zig").Vector;
+pub const Vector = @import("math/vector.zig").Vector;
 pub const Timer = @import("Timer.zig");
+pub const Bounding = @import("physics/Bounding.zig");
 
 //
 // Visuals
@@ -23,6 +25,7 @@ pub const Timer = @import("Timer.zig");
 pub const Window = @import("core/Window.zig");
 pub const Render = @import("core/Render.zig");
 pub const Color = @import("Color.zig");
+pub const Font = @import("Font.zig");
 
 pub const Image = @import("img/Image.zig");
 pub const Spritesheet = @import("img/Spritesheet.zig");
@@ -56,8 +59,10 @@ pub fn IMGError() void {
     std.debug.panic("An Image Error has Occured! Error code: {}\n", .{IMG_GetError().*});
 }
 
+pub fn TTFError() void {
+    std.debug.panic("A TTF Error has Occured! Error code: {}\n", .{TTF_GetError().*});
+}
+
 pub fn bound(value: anytype, start: anytype, end: anytype) @TypeOf(value, start, end) {
-    return if (start <= value and value <= end) value 
-           else if (value < start) start
-           else end;
+    return if (start <= value and value <= end) value else if (value < start) start else end;
 }

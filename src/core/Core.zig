@@ -21,6 +21,8 @@ pub fn new(size: lsdl.Size) Self {
 
     _ = lsdl.IMG_Init(lsdl.IMG_INIT_PNG);
 
+    if (lsdl.TTF_Init() == -1) lsdl.TTFError();
+
     const window = Window.new(size);
 
     const render = Render.new(window);

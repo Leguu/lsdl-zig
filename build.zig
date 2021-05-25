@@ -5,6 +5,7 @@ pub fn build(b: *Builder) void {
     const lib = b.addStaticLibrary("lsdl-zig", "src/lsdl.zig");
     lib.linkLibC();
     lib.linkSystemLibrary("SDL2");
+    lib.linkSystemLibrary("SDL2_ttf");
     lib.linkSystemLibrary("SDL2_image");
     lib.setBuildMode(mode);
     lib.install();
