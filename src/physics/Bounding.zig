@@ -2,26 +2,25 @@ const std = @import("std");
 const lsdl = @import("../lsdl.zig");
 
 boxes: []Box,
+pos: lsdl.Vector(f32) = lsdl.Vector(f32).zero(),
 
 const Self = @This();
 
 pub const Box = struct {
-    pos: lsdl.Size,
-    size: lsdl.Size,
+    pos: lsdl.Vector(f32),
+    size: lsdl.Vector(f32),
+    absolute: *const lsdl.Vector(f32) = &lsdl.Vector(f32).zero(),
 
-    pub fn new(pos: lsdl.Size, size: lsdl.Size) @This() {
+    pub fn new(pos: lsdl.Vector(f32), size: lsdl.Vector(f32)) @This() {
         return .{ .pos = pos, .size = size };
     }
 
+    // TODO: Fix this
     pub fn colliding(self: Self.Box, other: Self.Box) bool {
-        if (self.pos.x < other.pos.x + other.size.x and
-            self.pos.x + self.size.x > other.pos.x and
-            self.pos.y < other.pos.y + other.size.y and
-            self.pos.y + self.size.y > other.pos.y)
-        // if (self.pos.x + self.size.x >= other.pos.x and
-        //     self.pos.x <= other.pos.x + other.size.x and
-        //     self.pos.y + self.size.y >= other.pos.y and
-        //     self.pos.y <= other.pos.y + other.size.y)
+        if (self.absolute.x + self.pos.x + self.size.x >= other.absolute.x + other.pos.x and
+            self.absolute.x + self.pos.x <= other.absolute.x + other.pos.x + other.size.x and
+            self.absolute.y + self.pos.y + self.size.y >= other.absolute.y + other.pos.y and
+            self.absolute.y + self.pos.y <= other.absolute.y + other.pos.y + other.size.y)
         {
             return true;
         }
@@ -31,12 +30,16 @@ pub const Box = struct {
 
 pub fn draw(self: Self, render: *lsdl.Render, pos: lsdl.Size) void {
     for (self.boxes) |box| {
-        render.drawRectangleSize(pos.add(box.pos), box.size);
+        render.drawRectangle(self.pos.add(box.pos), box.size);
     }
 }
 
 pub fn new(boxes: []Box) Self {
-    return .{ .boxes = boxes };
+    const self = Self{ .boxes = boxes };
+    for (boxes) |*box| {
+        box.absolute = &self.pos;
+    }
+    return self;
 }
 
 pub fn colliding(self: Self, other: Self) bool {
