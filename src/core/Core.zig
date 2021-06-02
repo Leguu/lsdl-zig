@@ -14,7 +14,7 @@ render: Render,
 
 const Self = @This();
 
-pub fn new(size: lsdl.Size, opts: Window.WindowOpts) Self {
+pub fn new( opts: Window.WindowOpts) Self {
     if (lsdl.SDL_Init(lsdl.SDL_INIT_VIDEO) != 0) {
         std.debug.panic("Error has occured initializing SDL: {}\n", .{lsdl.SDL_GetError().*});
     }
@@ -23,7 +23,7 @@ pub fn new(size: lsdl.Size, opts: Window.WindowOpts) Self {
 
     if (lsdl.TTF_Init() == -1) lsdl.TTFError();
 
-    const window = Window.new(size, opts);
+    const window = Window.new(opts);
 
     const render = Render.new(window);
 

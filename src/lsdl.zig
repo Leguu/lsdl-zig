@@ -9,8 +9,6 @@ usingnamespace @cImport({
 
 /// Size for various constructs
 pub const Size = Vector(i32);
-
-//
 // Core and engine
 //
 pub const Core = @import("core/Core.zig");
@@ -18,8 +16,6 @@ pub const Core = @import("core/Core.zig");
 pub const Vector = @import("math/vector.zig").Vector;
 pub const Timer = @import("Timer.zig");
 pub const Bounding = @import("physics/Bounding.zig");
-
-//
 // Visuals
 //
 pub const Window = @import("core/Window.zig");
@@ -30,8 +26,6 @@ pub const Font = @import("Font.zig");
 pub const Image = @import("img/Image.zig");
 pub const Spritesheet = @import("img/Spritesheet.zig");
 pub const Animation = @import("img/Animation.zig");
-
-//
 // Constants and input
 //
 pub const input = @import("input.zig");
@@ -45,8 +39,6 @@ pub const Keycode = usize;
 
 pub const keymod = @import("const/keymod.zig");
 pub const Keymod = usize;
-
-//
 // Utility functions
 //
 const std = @import("std");
