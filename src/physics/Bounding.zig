@@ -8,7 +8,7 @@ pub const Box = lsdl.Box(f32);
 
 const Self = @This();
 
-pub fn draw(self: Self, render: *lsdl.Render) void {
+pub fn draw(self: Self, render: lsdl.Render) void {
     for (self.boxes) |box| {
         render.drawBox(box.addPos(self.pos));
     }
