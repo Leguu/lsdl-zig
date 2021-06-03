@@ -11,11 +11,11 @@ pub const Box = struct {
     size: lsdl.Vector(f32),
     absolute: *const lsdl.Vector(f32) = undefined,
 
-    pub fn colliding(self: Self.Box, other: Self.Box) bool {
-        if (self.absolute.x + self.pos.x + self.size.x >= other.absolute.x + other.pos.x and
-            self.absolute.x + self.pos.x <= other.absolute.x + other.pos.x + other.size.x and
-            self.absolute.y + self.pos.y + self.size.y >= other.absolute.y + other.pos.y and
-            self.absolute.y + self.pos.y <= other.absolute.y + other.pos.y + other.size.y)
+    pub fn colliding(self: Self.Box, other: Self.Box, self_absolute: lsdl.Vector(f32), other_absolute: lsdl.Vector(f32)) bool {
+        if (self_absolute.x + self.pos.x + self.size.x >= other_absolute.x + other.pos.x and
+            self_absolute.x + self.pos.x <= other_absolute.x + other.pos.x + other.size.x and
+            self_absolute.y + self.pos.y + self.size.y >= other_absolute.y + other.pos.y and
+            self_absolute.y + self.pos.y <= other_absolute.y + other.pos.y + other.size.y)
         {
             return true;
         }
@@ -40,7 +40,7 @@ pub fn new(pos: lsdl.Vector(f32), boxes: []Box) Self {
 pub fn colliding(self: Self, other: Self) bool {
     for (self.boxes) |box| {
         for (other.boxes) |other_box| {
-            if (box.colliding(other_box)) return true;
+            if (box.colliding(other_box, self.pos, other.pos)) return true;
         }
     }
     return false;
