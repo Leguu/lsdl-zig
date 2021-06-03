@@ -7,7 +7,7 @@ const Self = @This();
 
 pub const WindowOpts = struct {
     title: [*c]const u8 = null,
-    size: lsdl.Size = .{.x = 1000, .y = 1000},
+    size: lsdl.Size = .{ .x = 1000, .y = 1000 },
     flags: []const Flags = &.{},
 
     const Flags = enum(u32) {

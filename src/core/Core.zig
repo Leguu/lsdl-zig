@@ -14,7 +14,7 @@ render: Render,
 
 const Self = @This();
 
-pub fn new( opts: Window.WindowOpts) Self {
+pub fn new(opts: Window.WindowOpts) Self {
     if (lsdl.SDL_Init(lsdl.SDL_INIT_VIDEO) != 0) {
         std.debug.panic("Error has occured initializing SDL: {}\n", .{lsdl.SDL_GetError().*});
     }

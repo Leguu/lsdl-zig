@@ -14,7 +14,6 @@ pub const LOCALECHANGED = 0x107;
 pub const DISPLAYEVENT = 0x150;
 
 pub const WINDOWEVENT = 0x200;
-pub const SYSWMEVENT;
 
 pub const KEYDOWN = 0x300;
 pub const KEYUP = 0x301;
