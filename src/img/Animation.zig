@@ -1,4 +1,5 @@
 const lsdl = @import("../lsdl.zig");
+const std = @import("std");
 
 spritesheet: lsdl.Spritesheet,
 animation_length: u64,
@@ -10,15 +11,12 @@ const Self = @This();
 pub fn new(spritesheet: lsdl.Spritesheet, animation_length: u64) Self {
     return Self{
         .spritesheet = spritesheet,
-        .animation_length = animation_length,
+        .animation_length = animation_length * std.time.ns_per_ms,
     };
 }
 
 pub fn load(image: lsdl.Image, sprite_size: lsdl.Size, animation_length: u64) Self {
-    return Self{
-        .spritesheet = lsdl.Spritesheet.new(image, sprite_size),
-        .animation_length = animation_length,
-    };
+    return new(lsdl.Spritesheet.new(image, sprite_size), animation_length);
 }
 
 pub fn tick(self: *Self, dt: u64) void {

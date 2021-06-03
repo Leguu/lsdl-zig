@@ -10,7 +10,7 @@ pub const WindowOpts = struct {
     size: lsdl.Size = .{.x = 1000, .y = 1000},
     flags: []const Flags = &.{},
 
-    pub const Flags = enum(u32) {
+    const Flags = enum(u32) {
         fullscreen = lsdl.SDL_WINDOW_FULLSCREEN,
         fullscreen_desktop = lsdl.SDL_WINDOW_FULLSCREEN_DESKTOP,
         opengl = lsdl.SDL_WINDOW_OPENGL,
@@ -31,6 +31,7 @@ pub fn new(opts: WindowOpts) Self {
     for (opts.flags) |flag| {
         result = @enumToInt(flag) | result;
     }
+
     const window = lsdl.SDL_CreateWindow(opts.title, 0, 0, opts.size.x, opts.size.y, result) orelse {
         std.debug.panic("Error has occured creating window: {}\n", .{lsdl.SDL_GetError().*});
     };

@@ -10,9 +10,7 @@ pub fn new(path: [*c]const u8, size: i32) Self {
     if (font == null) {
         lsdl.TTFError();
     }
-    return Self{
-        .font = font.?,
-    };
+    return Self{ .font = font.? };
 }
 
 pub fn create(self: Self, render: lsdl.Render, text: [*c]const u8) lsdl.Image {

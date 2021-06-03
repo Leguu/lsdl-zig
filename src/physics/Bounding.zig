@@ -9,13 +9,8 @@ const Self = @This();
 pub const Box = struct {
     pos: lsdl.Vector(f32),
     size: lsdl.Vector(f32),
-    absolute: *const lsdl.Vector(f32) = &lsdl.Vector(f32).zero(),
+    absolute: *const lsdl.Vector(f32) = undefined,
 
-    pub fn new(pos: lsdl.Vector(f32), size: lsdl.Vector(f32)) @This() {
-        return .{ .pos = pos, .size = size };
-    }
-
-    // TODO: Fix this
     pub fn colliding(self: Self.Box, other: Self.Box) bool {
         if (self.absolute.x + self.pos.x + self.size.x >= other.absolute.x + other.pos.x and
             self.absolute.x + self.pos.x <= other.absolute.x + other.pos.x + other.size.x and
@@ -28,15 +23,15 @@ pub const Box = struct {
     }
 };
 
-pub fn draw(self: Self, render: *lsdl.Render, pos: lsdl.Size) void {
+pub fn draw(self: Self, render: *lsdl.Render) void {
     for (self.boxes) |box| {
         render.drawRectangle(self.pos.add(box.pos), box.size);
     }
 }
 
-pub fn new(boxes: []Box) Self {
-    const self = Self{ .boxes = boxes };
-    for (boxes) |*box| {
+pub fn new(pos: lsdl.Vector(f32), boxes: []Box) Self {
+    const self = Self{ .pos = pos, .boxes = boxes };
+    for (self.boxes) |*box| {
         box.absolute = &self.pos;
     }
     return self;
