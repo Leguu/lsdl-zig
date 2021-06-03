@@ -38,4 +38,5 @@ pub fn cleanup(self: *Self) void {
     lsdl.SDL_DestroyWindow(self.window.window);
     lsdl.SDL_Quit();
     lsdl.IMG_Quit();
+    lsdl.TTF_Quit();
 }

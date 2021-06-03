@@ -13,6 +13,10 @@ pub fn new(path: [*c]const u8, size: i32) Self {
     return Self{ .font = font.? };
 }
 
+pub fn deinit(self: Self) void {
+    lsdl.TTF_CloseFont(self.font);
+}
+
 pub fn create(self: Self, render: lsdl.Render, text: [*c]const u8) lsdl.Image {
     const surface = lsdl.TTF_RenderText_Blended(self.font, text, .{ .r = 0, .g = 0, .b = 0, .a = 255 });
     return lsdl.Image.loadSurface(render, surface);

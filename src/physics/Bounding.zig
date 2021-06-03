@@ -10,7 +10,7 @@ const Self = @This();
 
 pub fn draw(self: Self, render: *lsdl.Render) void {
     for (self.boxes) |box| {
-        render.drawRectangle(self.pos.add(box.pos), box.size);
+        render.drawBox(box.addPos(self.pos));
     }
 }
 
