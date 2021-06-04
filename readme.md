@@ -23,6 +23,8 @@ pub fn build(b: *Builder) void {
 
 - [x] Spritesheet and animation classes
 - [x] Fix `timer.zig` (use accumulators and wait to minimize CPU use)
+- [x] Add font-chaching for increasing performance
+    - [ ] Improve font-caching for different Text objects
 - [ ] Event system
 - [ ] Implement interfaces
 - [ ] Implement physics engine

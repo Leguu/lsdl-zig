@@ -27,6 +27,7 @@ pub const Window = @import("core/Window.zig");
 pub const Render = @import("core/Render.zig");
 pub const Color = @import("Color.zig");
 pub const Font = @import("Font.zig");
+pub const Text = @import("Text.zig");
 
 pub const Image = @import("img/Image.zig");
 pub const Spritesheet = @import("img/Spritesheet.zig");

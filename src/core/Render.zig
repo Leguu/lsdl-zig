@@ -13,7 +13,7 @@ pub fn new(window: Window) Self {
         std.debug.panic("Error has occured creating renderer: {}\n", .{lsdl.SDL_GetError().*});
     };
 
-    return Self{ .renderer = renderer };
+    return .{ .renderer = renderer };
 }
 
 pub fn drawLine(self: Self, pos: lsdl.Vector(f32), target: lsdl.Vector(f32)) void {

@@ -15,7 +15,7 @@ pub fn draw(self: Self, render: lsdl.Render) void {
 }
 
 pub fn new(pos: lsdl.Vector(f32), boxes: []Box) Self {
-    return Self{ .pos = pos, .boxes = boxes };
+    return .{ .pos = pos, .boxes = boxes };
 }
 
 pub fn colliding(self: Self, other: Self) bool {

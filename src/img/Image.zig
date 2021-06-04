@@ -34,18 +34,7 @@ pub fn load(render: lsdl.Render, path: [*c]const u8) Self {
     const surface = lsdl.IMG_Load(path);
     if (surface == 0) lsdl.IMGError();
 
-    const texture = lsdl.SDL_CreateTextureFromSurface(render.renderer, surface);
-    if (texture == null) lsdl.SDLError();
-
-    lsdl.SDL_FreeSurface(surface);
-
-    var tsize = lsdl.Size.zero();
-    if (lsdl.SDL_QueryTexture(texture, 0, 0, &tsize.x, &tsize.y) < 0) lsdl.SDLError();
-
-    return Self{
-        .texture = texture.?,
-        .texture_size = tsize,
-    };
+    return loadSurface(render, surface);
 }
 
 pub fn loadScale(render: lsdl.Render, path: [*c]const u8, scale: f32) Self {
